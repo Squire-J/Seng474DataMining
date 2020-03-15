@@ -1,4 +1,6 @@
 import pandas as pd
+from pyephem_sunpath.sunpath import sunpos
+from datetime import datetime
 # import numpy as np
 import csv
 
@@ -10,11 +12,10 @@ def convertToCSV(fileName):
     csvName = "Data/csvData/" + rawName + '.csv'
     dataFrame = pd.read_excel(rawFilePath)
     dataFrame.to_csv(csvName, index = False, header=True)
+    return csvName
 
 
 def fetchData(fileName):
-    fileName = "Data/csvData/"+fileName
-    fileName = (fileName.split("."))[0] + ".csv"
     results = []
     with open(fileName) as csvfile:
         reader = csv.reader(csvfile) # change contents to floats
@@ -41,19 +42,26 @@ def fetchData(fileName):
         returnArray.append(newEntry)
     return returnArray
 
-def getBounds(fileName):
-    fileName = "Data/csvData/"+fileName
-    fileName = (fileName.split("."))[0] + ".csv"
-    results = []
-    with open(fileName) as csvfile:
-        reader = csv.reader(csvfile) # change contents to floats
-        for row in reader: # each row is a list
-            results.append(row)
+def fetchLabels(data, year, month, day, latitude, longitude, timezone):
+    Labels = []
+    for entry in data:
+        result = []
+        hour = int(entry[6])
+        minute = int(entry[7])
+        second = int(data[0][8])
+        result = fetchLabel(year, month, day, hour, minute, second, latitude, longitude, timezone)
+        Labels.append(result)
+    return Labels
 
-    min = None
-    max = None
-    returnArray = [min,max]
 
-    results.remove(results[0])
-    for entries in results:
-        for item in entry:
+def fetchLabel(year, month, date, hour, minute, second, latitude, longitude, timezone):
+    returnLabels = []
+    thetime = datetime(year, month, date, hour, minute, second)
+    lat = latitude
+    lon = longitude
+    tz = timezone
+
+    alt, azm = sunpos(thetime, lat, lon, tz, dst=False)
+    returnLabels.append(alt)
+    returnLabels.append(azm)
+    return returnLabels
