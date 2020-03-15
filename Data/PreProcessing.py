@@ -4,7 +4,7 @@ import csv
 
 
 def convertToCSV(fileName):
-    rawFile = 'mar6.xlsx'
+    rawFile = fileName
     rawFilePath = 'Data/RawData/'+rawFile
     rawName = (rawFile.split("."))[0]
     csvName = "Data/csvData/" + rawName + '.csv'
@@ -14,7 +14,7 @@ def convertToCSV(fileName):
 
 def fetchData(fileName):
     fileName = "Data/csvData/"+fileName
-
+    fileName = (fileName.split("."))[0] + ".csv"
     results = []
     with open(fileName) as csvfile:
         reader = csv.reader(csvfile) # change contents to floats
@@ -40,3 +40,20 @@ def fetchData(fileName):
             newEntry.append(float(value))
         returnArray.append(newEntry)
     return returnArray
+
+def getBounds(fileName):
+    fileName = "Data/csvData/"+fileName
+    fileName = (fileName.split("."))[0] + ".csv"
+    results = []
+    with open(fileName) as csvfile:
+        reader = csv.reader(csvfile) # change contents to floats
+        for row in reader: # each row is a list
+            results.append(row)
+
+    min = None
+    max = None
+    returnArray = [min,max]
+
+    results.remove(results[0])
+    for entries in results:
+        for item in entry:
