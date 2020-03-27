@@ -44,6 +44,7 @@ def fetchData(fileName):
 
 def fetchLabels(data, year, month, day, latitude, longitude, timezone):
     Labels = []
+    print("Test")
     for entry in data:
         result = []
         hour = int(entry[6])
