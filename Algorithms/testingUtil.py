@@ -39,9 +39,9 @@ def processLabels(data):
     for entry in data:
         newEntry = []
 
-        x = r * cos(elevation) * cos(azimuth)
-        y = r * cos(elevation) * sin(azimuth)
-        z = r * sin(elevation)
+        x = r * cos(entry[elevation]) * cos(entry[azimuth])
+        y = r * cos(entry[elevation]) * sin(entry[azimuth])
+        z = r * sin(entry[elevation])
         
         newEntry.append(x)
         newEntry.append(y)
@@ -58,10 +58,9 @@ def plotTracing(simpleLabels, complicatedLabels, expectedLabels):
     complicated = np.asarray(processLabels(complicatedLabels))
     expected = np.asarray(processLabels(expectedLabels))
 
-    print(expected)
-
     ax.scatter(expected[:,0], expected[:,1], expected[:,2], marker = 'x', color = 'k')
-    # ax.scatter(simple[:,0], simple[:,1], simple[:,2], marker = 'o', color = 'r')
-    # ax.scatter(complicated[:,0], complicated[:,1], complicated[:,2], marker = 'o', color = 'b')
+    ax.scatter(simple[:,0], simple[:,1], simple[:,2], marker = 'o', color = 'r')
+    ax.scatter(complicated[:,0], complicated[:,1], complicated[:,2], marker = 'o', color = 'b')
+    ax.scatter(0,0,0, marker = 'X', color = 'k')
     
     plt.show()
