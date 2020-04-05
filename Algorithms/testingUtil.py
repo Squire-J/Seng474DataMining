@@ -66,6 +66,6 @@ def plotTracing(algorithmLabels, machineLabels, expectedLabels):
         expected = np.asarray(processLabels(expectedLabels))
         ax.scatter(expected[:,0], expected[:,1], expected[:,2], marker = 'x', color = 'k')
     
-    ax.scatter(0,0,0, marker = 'X', color = 'k')
+    ax.scatter(0,0,0, marker = '.', color = 'k')
     
     plt.show()
