@@ -60,7 +60,7 @@ def plotTracing(algorithmLabels, machineLabels, expectedLabels):
 
     if machineLabels != None:
         complicated = np.asarray(processLabels(machineLabels))
-        ax.scatter(complicated[:,0], complicated[:,1], complicated[:,2], marker = 'o', color = 'b')
+        ax.scatter(complicated[:,0], complicated[:,1], complicated[:,2], marker = '.', color = 'b')
     
     if expectedLabels != None:
         expected = np.asarray(processLabels(expectedLabels))
