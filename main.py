@@ -17,4 +17,4 @@ timezone = int(-8)
 Labels = fetchLabels(data, year, month, day, latitude, longitude, timezone)
 
 getScore(Labels,Labels,5)
-plotTracing(Labels,Labels,Labels)
+plotTracing(None,None,Labels)

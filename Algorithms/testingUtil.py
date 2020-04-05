@@ -27,7 +27,7 @@ def getScore(calculatedLabels, expectedLabels, degreeVariance):
             continue
 
         score = score + 1
-    print("Score: "+str(score/total)+"\n")
+    print("Score: "+str(100 * score/total)+"%\n")
     return score/total
 
 def processLabels(data):
@@ -53,13 +53,19 @@ def processLabels(data):
 def plotTracing(simpleLabels, complicatedLabels, expectedLabels):
     fig = plt.figure()
     ax = Axes3D(fig)
-    simple = np.asarray(processLabels(simpleLabels))
-    complicated = np.asarray(processLabels(complicatedLabels))
-    expected = np.asarray(processLabels(expectedLabels))
 
-    ax.scatter(expected[:,0], expected[:,1], expected[:,2], marker = 'x', color = 'k')
-    ax.scatter(simple[:,0], simple[:,1], simple[:,2], marker = 'o', color = 'r')
-    ax.scatter(complicated[:,0], complicated[:,1], complicated[:,2], marker = 'o', color = 'b')
+    if simpleLabels != None:
+        simple = np.asarray(processLabels(simpleLabels))
+        ax.scatter(simple[:,0], simple[:,1], simple[:,2], marker = 'o', color = 'r')
+
+    if complicatedLabels != None:
+        complicated = np.asarray(processLabels(complicatedLabels))
+        ax.scatter(complicated[:,0], complicated[:,1], complicated[:,2], marker = 'o', color = 'b')
+    
+    if expectedLabels != None:
+        expected = np.asarray(processLabels(expectedLabels))
+        ax.scatter(expected[:,0], expected[:,1], expected[:,2], marker = 'x', color = 'k')
+    
     ax.scatter(0,0,0, marker = 'X', color = 'k')
     
     plt.show()
