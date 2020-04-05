@@ -7,20 +7,19 @@ from math import cos
 def getScore(calculatedLabels, expectedLabels, tolerance):
     score = 0
     total = len(calculatedLabels)
-    print("Tolerance: "+str(tolerance))
+    print("Tolerance of "+str(tolerance)+" degrees")
     for i in range (total):
         calculatedAlpha = calculatedLabels[i][0]
         calculatedBeta = calculatedLabels[i][1]
         expectedAlpha = expectedLabels[i][0]
         expectedBeta = expectedLabels[i][1]
 
-        differenceAlpha = int(expectedAlpha * tolerance)
-        differenceBeta = int(expectedBeta * tolerance)
+        differenceBound = tolerance/2
 
-        upperboundAlpha = expectedAlpha + differenceAlpha
-        lowerboundAlpha = expectedAlpha - differenceAlpha
-        upperboundBeta = expectedBeta + differenceBeta
-        lowerboundBeta = expectedBeta - differenceBeta
+        upperboundAlpha = expectedAlpha + differenceBound
+        lowerboundAlpha = expectedAlpha - differenceBound
+        upperboundBeta = expectedBeta + differenceBound
+        lowerboundBeta = expectedBeta - differenceBound
 
         if (calculatedAlpha > upperboundAlpha) or (calculatedAlpha < lowerboundAlpha):
             continue
