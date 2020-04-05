@@ -4,17 +4,17 @@ import numpy as np
 from math import sin
 from math import cos
 
-def getScore(calculatedLabels, expectedLabels, tolerance):
+def getScore(calculatedLabels, expectedLabels, degreeVariance):
     score = 0
     total = len(calculatedLabels)
-    print("Tolerance of "+str(tolerance)+" degrees")
+    print("Tolerance of "+str(degreeVariance)+" degrees")
     for i in range (total):
         calculatedAlpha = calculatedLabels[i][0]
         calculatedBeta = calculatedLabels[i][1]
         expectedAlpha = expectedLabels[i][0]
         expectedBeta = expectedLabels[i][1]
 
-        differenceBound = tolerance/2
+        differenceBound = degreeVariance/2
 
         upperboundAlpha = expectedAlpha + differenceBound
         lowerboundAlpha = expectedAlpha - differenceBound
