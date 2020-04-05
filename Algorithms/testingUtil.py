@@ -50,16 +50,16 @@ def processLabels(data):
     return returnData
 
 
-def plotTracing(simpleLabels, complicatedLabels, expectedLabels):
+def plotTracing(algorithmLabels, machineLabels, expectedLabels):
     fig = plt.figure()
     ax = Axes3D(fig)
 
-    if simpleLabels != None:
-        simple = np.asarray(processLabels(simpleLabels))
+    if algorithmLabels != None:
+        simple = np.asarray(processLabels(algorithmLabels))
         ax.scatter(simple[:,0], simple[:,1], simple[:,2], marker = 'o', color = 'r')
 
-    if complicatedLabels != None:
-        complicated = np.asarray(processLabels(complicatedLabels))
+    if machineLabels != None:
+        complicated = np.asarray(processLabels(machineLabels))
         ax.scatter(complicated[:,0], complicated[:,1], complicated[:,2], marker = 'o', color = 'b')
     
     if expectedLabels != None:
